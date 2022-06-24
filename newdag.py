@@ -65,7 +65,7 @@ with DAG(
     def extract(**kwargs):
         ti = kwargs['ti']
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
-        print(get_ip_address())
+        print(f'RIKI - {get_ip_address()}')
 
         ti.xcom_push('order_data', data_string)
 
