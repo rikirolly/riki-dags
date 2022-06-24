@@ -25,6 +25,7 @@ This ETL DAG is demonstrating an Extract -> Transform -> Load pipeline
 # [START import_module]
 import json
 from textwrap import dedent
+import socket
 
 import pendulum
 
@@ -33,6 +34,11 @@ from airflow import DAG
 
 # Operators; we need this to operate!
 from airflow.operators.python import PythonOperator
+
+def get_ip_address():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    return s.getsockname()[0]
 
 # [END import_module]
 
@@ -59,6 +65,8 @@ with DAG(
     def extract(**kwargs):
         ti = kwargs['ti']
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
+        print(get_ip_address())
+
         ti.xcom_push('order_data', data_string)
 
     # [END extract_function]
