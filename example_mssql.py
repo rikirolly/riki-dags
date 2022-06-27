@@ -26,12 +26,9 @@ from airflow import DAG
 from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
 from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
 
-ENV_ID = os.environ.get("SYSTEM_TESTS_ENV_ID")
-DAG_ID = "example_mssql"
-
 
 with DAG(
-    DAG_ID,
+    "example_mssql",
     schedule_interval='@daily',
     start_date=datetime(2021, 10, 1),
     tags=['riki'],
@@ -134,24 +131,24 @@ with DAG(
         sql=r"""SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality;""",
     )
 
-    (
-        get_ict_quality
-        # create_table_mssql_task
-        # >> insert_mssql_hook()
-        # >> create_table_mssql_from_external_file
-        # >> populate_user_table
-        # >> get_all_countries
-        # >> get_all_description
-        # >> get_countries_from_continent
-    )
+    get_ict_quality
+    # (
+    #     create_table_mssql_task
+    #     >> insert_mssql_hook()
+    #     >> create_table_mssql_from_external_file
+    #     >> populate_user_table
+    #     >> get_all_countries
+    #     >> get_all_description
+    #     >> get_countries_from_continent
+    # )
     # [END mssql_operator_howto_guide]
 
-    from tests.system.utils.watcher import watcher
+    # from tests.system.utils.watcher import watcher
 
     # This test needs watcher in order to properly mark success/failure
     # when "tearDown" task with trigger rule is part of the DAG
-    list(dag.tasks) >> watcher()
-from tests.system.utils import get_test_run  # noqa: E402
+    # list(dag.tasks) >> watcher()
+# from tests.system.utils import get_test_run  # noqa: E402
 
 # Needed to run the example DAG with pytest (see: tests/system/README.md#run_via_pytest)
-test_run = get_test_run(dag)
+# test_run = get_test_run(dag)
