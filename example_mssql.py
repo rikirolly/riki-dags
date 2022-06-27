@@ -22,6 +22,7 @@ Example use of MsSql related operators.
 import os
 from datetime import datetime
 
+import pymssql
 from airflow import DAG
 from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
 from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
