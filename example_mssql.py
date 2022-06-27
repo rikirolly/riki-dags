@@ -148,7 +148,7 @@ with DAG(
                 # Create a cursor from the connection
                 cursor = conn.cursor()
                 cursor.execute("SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality")
-		        for row in cursor: 
+                for row in cursor: 
                     print(row)
         except:
             logging.error("Error when creating pymssql database connection: %s", sys.exc_info()[0])
