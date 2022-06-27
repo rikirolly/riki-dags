@@ -25,6 +25,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
 from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
+from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
