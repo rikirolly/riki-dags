@@ -125,13 +125,43 @@ with DAG(
     # )
     # [END mssql_operator_howto_guide_params_passing_get_query]
 
-    get_ict_quality = MsSqlOperator(
-        task_id="get_ict_quality",
-        mssql_conn_id='RojBiSQLId',
-        sql=r"""SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality;""",
+    # Credo che MsSqlOperator sia usato per insert e create table a DB
+    # get_ict_quality = MsSqlOperator(
+    #     task_id="get_ict_quality",
+    #     mssql_conn_id='RojBiSQLId',
+    #     sql=r"""SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality;""",
+    # )
+
+    # get_ict_quality
+
+    def get_ict_quality(**kwargs):
+        try:
+                conn = pymssql.connect(
+                    server='rojbi',
+                    user='rojbi',
+                    password='rojbi',
+                    database='rojbi'
+                )
+                
+                # Create a cursor from the connection
+                cursor = conn.cursor()
+                cursor.execute("SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality")
+                row = cursor.fetchone()
+                
+                if row:
+                    print(row)
+        except:
+            logging.error("Error when creating pymssql database connection: %s", sys.exc_info()[0])
+
+    select_query = PythonOperator(
+        task_id='get_ict_quality',
+        python_callable=get_ict_quality,
+        dag=dag,
     )
 
-    get_ict_quality
+    select_query
+
+
     # (
     #     create_table_mssql_task
     #     >> insert_mssql_hook()
