@@ -132,6 +132,12 @@ if k8s:
             """
             Tests whether the volume has been mounted.
             """
+
+            if path.exists('/shared'):
+                print('RIKI - folder shared exist')
+            else:
+                print('RIKI - folder shared does not exist')
+
             for i in range(5):
                 try:
                     return_code = os.system("cat /shared/test.txt")
