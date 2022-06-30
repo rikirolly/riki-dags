@@ -83,7 +83,7 @@ if k8s:
             ),
         }
 
-        @task(executor_config=executor_config_volume_mount)
+        @task(executor_config=executor_config_volume_mount,queue='kubernetes',task_id='task_with_kubernetes_executor')
         def test_volume_mount():
             """
             Tests whether the volume has been mounted.
@@ -127,7 +127,7 @@ if k8s:
             ),
         }
 
-        @task(executor_config=executor_config_sidecar)
+        @task(executor_config=executor_config_sidecar,queue='kubernetes',task_id='task_with_kubernetes_executor')
         def test_sharedvolume_mount():
             """
             Tests whether the volume has been mounted.
