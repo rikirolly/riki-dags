@@ -35,7 +35,7 @@ with DAG('filesensor_example',
             timeout=60 * 30,
             mode="reschedule",
             on_failure_callback=_failure_callback,
-            filepath=f'partner_{partner}.txt',
+            filepath=f'/home/rolando/kindshare/partner_{partner}.txt',
             fs_conn_id=f'conn_filesensor_{partner}'
         ) for partner in ['a', 'b', 'c']]
 
