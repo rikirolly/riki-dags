@@ -76,7 +76,7 @@ if k8s:
                     volumes=[
                         k8s.V1Volume(
                             name="example-kubernetes-test-volume",
-                            host_path=k8s.V1HostPathVolumeSource(path="/tmp/"),
+                            host_path=k8s.V1HostPathVolumeSource(path="/home/kindshare"),
                         )
                     ],
                 )
