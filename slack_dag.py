@@ -12,10 +12,7 @@ with DAG(
     catchup=False,
     tags=['riki'],
 ) as dag:
-
-    SLACK_CONN_ID = 'Slack'
-
-    slack_webhook_token = BaseHook.get_connection(SLACK_CONN_ID).password
+    slack_webhook_token = BaseHook.get_connection('Slack').password
     slack_msg = """
                 :red_circle: Task Failed. 
                 *Task*: {task}  
