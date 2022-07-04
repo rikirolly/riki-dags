@@ -20,6 +20,7 @@ Example use of MsSql related operators.
 """
 # [START mssql_operator_howto_guide]
 import os
+from os import path
 from datetime import datetime
 
 import pymssql
@@ -137,6 +138,11 @@ with DAG(
     # get_ict_quality
 
     def get_ict_quality(**kwargs):
+        if path.exists('/home/kindshare'):
+            print('RIKI - folder kindshare exist')
+        else:
+            print('RIKI - folder kindshare does not exist')
+
         try:
                 conn = pymssql.connect(
                     server='rojbi',
