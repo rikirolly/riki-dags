@@ -18,10 +18,10 @@ def _store():
 
 def _failure_callback(context):
 
+    if isinstance(context['exception'], AirflowSensorTimeout):
+        print(context)
+        print("Sensor timed out")
 
-if isinstance(context['exception'], AirflowSensorTimeout):
-    print(context)
-    print("Sensor timed out")
 
 with DAG('filesensor_example',
          schedule_interval='@daily',
