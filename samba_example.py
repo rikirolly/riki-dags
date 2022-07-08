@@ -21,6 +21,8 @@ Example use of SambaHook.
 import os
 from os import path
 from datetime import datetime
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
 from airflow.providers.samba.hooks.samba import SambaHook
 
 
