@@ -144,7 +144,15 @@ with DAG(
             print('RIKI - folder kindshare does not exist')
 
         try:
-            conn = MsSqlHook.get_connection(conn_id='RojBiSQLId')
+            airflow_conn = MsSqlHook.get_connection(conn_id='RojBiSQLId')
+
+            conn = pymssql.connect(
+                server=airflow_conn.host,
+                user=airflow_conn.login,
+                password=airflow_conn.password,
+                database=self.schema or airflow_conn.schema,
+                port=airflow_conn.port,
+            )
             
             # Create a cursor from the connection
             cursor = conn.cursor()
