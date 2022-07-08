@@ -144,18 +144,13 @@ with DAG(
             print('RIKI - folder kindshare does not exist')
 
         try:
-                conn = pymssql.connect(
-                    server='rojbi',
-                    user='rojbi',
-                    password='rojbi',
-                    database='rojbi'
-                )
-                
-                # Create a cursor from the connection
-                cursor = conn.cursor()
-                cursor.execute("SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality")
-                for row in cursor: 
-                    print(row)
+            conn = MsSqlHook.get_connection(conn_id='RojBiSQLId')
+            
+            # Create a cursor from the connection
+            cursor = conn.cursor()
+            cursor.execute("SELECT TOP(1000) * FROM rojbi.dbo.ICTQuality")
+            for row in cursor: 
+                print(row)
         except:
             logging.error("Error when creating pymssql database connection: %s", sys.exc_info()[0])
 
