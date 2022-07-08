@@ -31,7 +31,7 @@ with DAG('filesensor_example',
     partners = [
         FileSensor(
             task_id=f'partner_{partner}',
-            poke_interval=60,
+            poke_interval=10,
             timeout=60 * 30,
             mode="reschedule",
             on_failure_callback=_failure_callback,
