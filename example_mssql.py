@@ -150,7 +150,7 @@ with DAG(
                 server=airflow_conn.host,
                 user=airflow_conn.login,
                 password=airflow_conn.password,
-                database=self.schema or airflow_conn.schema,
+                database=airflow_conn.schema,
                 port=airflow_conn.port,
             )
             
