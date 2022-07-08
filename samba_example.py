@@ -44,7 +44,7 @@ with DAG(
 
         try:
             samba = SambaHook(samba_conn_id='FileScanner')
-            dir = samba.listdir()
+            dir = samba.listdir('')
             print(dir)
         except:
             logging.error("Error when creating samba connection: %s", sys.exc_info()[0])
